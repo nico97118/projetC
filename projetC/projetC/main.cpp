@@ -159,10 +159,15 @@ void initbdd()
     initFilm(&films[2], "Fast and Furious",2001,102,&real[2],ACTION,COMEDIE,&acteurs[8],&acteurs[9]);
     initFilm(&films[3], "Inception", 2010, 148,&real[3],DRAME,SCIENCE_FICTION,&acteurs[2],&acteurs[6]);
     initFilm(&films[4], "Le loup de wallstreet", 2013, 179,&real[4],COMEDIE,DRAME,&acteurs[2],&acteurs[5]);
+    initFilm(&films[5], "Gravity", 2013, 91,&real[5],DRAME,SCIENCE_FICTION,&acteurs[3],&acteurs[4]);
+    initFilm(&films[6], "Thor", 2011, 115,&real[6],ACTION,FANTASTIQUE,&acteurs[11],&acteurs[10]);
+    
     
     initPersonne(&real[0], "Olivier", "Dahan", "francais", 0, 0, 0);
     initPersonne(&real[1], "Thomas", "Gilou", "francais", 0, 0, 0);
     initPersonne(&real[2], "Rob", "Cohen", "americain", 0, 0, 0);
     initPersonne(&real[3], "Christopher", "Nolan", "britanique", 0, 0, 0);
     initPersonne(&real[4], "Martin", "Scoresse", "americain", 0,0, 0);
+    initPersonne(&real[5],"Alfonso","Cuaron","mexique",28,11,1961);
+    initPersonne(&real[6],"Kenneth","Branagh","americain",10,12,1960);
 }

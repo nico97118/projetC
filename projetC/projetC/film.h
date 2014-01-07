@@ -19,6 +19,7 @@ typedef enum e_genre
     ACTION,
     HORREUR,
     COMEDIE,
+    FANTASTIQUE,
     DOCUMENTAIRE,
     POLICIER,
     DRAME,
