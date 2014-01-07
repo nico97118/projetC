@@ -9,54 +9,137 @@
 #include <iostream>
 #include "film.h"
 #include <cstring>
+
+#define NB_FILM 10
+#define NB_ACTEUR 20
+#define NB_REAL 10
 using namespace std;
+
+t_personne* rechercheActeur(const char* search);
+t_personne* rechercheReali(const char* search);
+t_personne* rechercheNom(const char* search);
+int playinthis(t_personne* act,t_film* film);
+t_film* rechercheFilm(const char* search);
+void filmographie(t_personne* search,long annee =-1);
+void filmographie(const char* search,long annee = -1);
+void filmographie(e_genre genre);
+
+t_personne real[NB_REAL];
+t_personne   acteurs[NB_ACTEUR];
+t_film     films[NB_FILM];
 
 int main()
 {
-    t_personne real;
-    t_personne   acteur1, acteur2;
-    t_film     f;
+    initPersonne(&acteurs[0], "Spacey", "kevin", "americain",0,0,0);
+    initPersonne(&acteurs[1], "Byrne", "Gabriel", "americain", 0, 0, 0);
+    initPersonne(&acteurs[2], "Leonardo", "Di Caprio", "americain", 0, 0, 0);
+    initPersonne(&acteurs[3], "Sandra", "Bullock", "americaine", 0, 0, 0);
+    initPersonne(&acteurs[4], "George", "Clooney", "americain", 0, 0, 0);
+    initPersonne(&acteurs[5], "Jean", "Du Jardin", "francais", 0, 0, 0);
+    initPersonne(&acteurs[6], "Marion", "Cottillard", "francaise", 0, 0, 0);
+    initPersonne(&acteurs[7], "Robert", "Doney Jr", "americain", 0, 0, 0);
+    initPersonne(&acteurs[8], "Vin", "Diesel", "americain", 0, 0, 0);
+    initPersonne(&acteurs[9], "Paul", "Walker", "americain", 0, 0, 0);
+    initPersonne(&acteurs[10], "Brad", "Pitt", "americain", 0, 0, 0);
+    initPersonne(&acteurs[11], "Natalie", "Portman", "americaine", 9, 6, 1981);
+    initPersonne(&acteurs[12], "Jose", "Garcia", "Francais", 0, 0, 0);
     
-    char letitre[100]="Usual Suspects";
+    initFilm(&films[0], "les Seigneurs", 2012, 80,&real[0],COMEDIE,AUCUN,&acteurs[12]);
+    initFilm(&films[1], "La Verité si je mens 3", 2012, 120,&real[1],COMEDIE,AUCUN,&acteurs[12]);
+    initFilm(&films[2], "Fast and Furious",2001,102,&real[2],ACTION,COMEDIE,&acteurs[8],&acteurs[9]);
+    initFilm(&films[3], "Inception", 2010, 148,&real[3],DRAME,SCIENCE_FICTION,&acteurs[2],&acteurs[6]);
+    initFilm(&films[4], "Le loup de wallstreet", 2013, 179,&real[4],COMEDIE,DRAME,&acteurs[2],&acteurs[5]);
     
-    char nomr[100]      = "Singer";
-    char prenomr[100]   = "Bryan";
+    initPersonne(&real[0], "Olivier", "Dahan", "francais", 0, 0, 0);
+    initPersonne(&real[1], "Thomas", "Gilou", "francais", 0, 0, 0);
+    initPersonne(&real[2], "Rob", "Cohen", "americain", 0, 0, 0);
+    initPersonne(&real[3], "Christopher", "Nolan", "britanique", 0, 0, 0);
+    initPersonne(&real[4], "Martin", "Scoresse", "americain", 0,0, 0);
     
-    char noma1[100]     = "Spacey";
-    char prenoma1[100]  = "Kevin";
-    
-    char noma2[100]     = "Byrne";
-    char prenoma2[100]  = "Gabriel";
-    
-    f.titre = new char[strlen(letitre)+1];
-    strcpy(f.titre,letitre);
-    f.annee = 1995;
-    f.duree = 106;
-    f.genres[0] = POLICIER;
-    f.genres[1] = ACTION;
-    
-    real.prenom = new char[strlen(prenomr)+1];
-    real.nom    = new char[strlen(prenomr)+1];
-    strcpy(real.prenom,prenomr);
-    strcpy(real.nom,nomr);
-    
-    acteur1.prenom = new char[strlen(prenoma1)+1];
-    acteur1.nom    = new char[strlen(noma1)+1];
-    strcpy(acteur1.prenom,prenoma1);
-    strcpy(acteur1.nom,noma1);
-    
-    acteur2.prenom = new char[strlen(prenoma2)+1];
-    acteur2.nom    = new char[strlen(noma2)+1];
-    strcpy(acteur2.prenom,prenoma2);
-    strcpy(acteur2.nom,noma2);
-    
-    f.realis = &real;
-    f.acteurs[0] = &acteur1;
-    f.acteurs[1] = &acteur2;
-    f.acteurs[2] = NULL;
-    
-    afficherFilm(f);
-    cout << endl;
+    filmographie("Leonardo",2012);
     
     return 0;
+}
+
+t_personne* rechercheActeur(const char* search)
+{
+    for(int i = 0;i<NB_ACTEUR;i++)
+    {
+        if(strcmp(search ,acteurs[i].nom)== 0 || strcmp(search, acteurs[i].prenom) == 0)
+           return &acteurs[i];
+
+    }
+    return NULL;
+}
+
+t_personne* rechercheReali(const char* search)
+{
+    for(int i =0;i<NB_REAL;i++)
+        if(strcmp(search,real[i].nom) == 0|| strcmp(search,real[i].prenom) == 0)
+            return &real[i];
+    return NULL;
+}
+
+t_personne* rechercheNom(const char* search)
+{
+    if(rechercheActeur(search))
+        return rechercheActeur(search);
+    else if (rechercheReali(search))
+        return rechercheReali(search);
+    else
+        return NULL;
+}
+
+t_film* rechercheFilm(const char* search)
+{
+    for (int i=0;i<NB_FILM;i++)
+        if(strcmp(search,films[i].titre)==0)
+            return &films[i];
+    return NULL;
+}
+
+int playinthis(t_personne* act,t_film* film) // retourne 1 si l'acteur joue dans ce film
+{
+    for(int i = 0; i<4 ; i++)
+        if (act == film->acteurs[i])
+            return 1;
+    return 0;
+}
+
+void filmographie(t_personne* search,long annee) // affiche la filmographie de la personne
+{
+    cout<<"Filmographie de ";
+    afficherPers(*search, false);
+    cout<<endl;
+    for(int i=0;i<NB_FILM;i++)
+    {
+        if(search == films[i].realis ||  playinthis(search,&films[i]) )
+        {
+            if(annee<0 || films[i].annee <= annee)
+            {
+            cout<<endl;
+            afficherFilm(films[i]);
+            cout<<endl;
+            }
+        }
+    }
+}
+
+void filmographie(const char* search, long annee)
+{
+    if(rechercheNom(search))
+        filmographie(rechercheNom(search),annee);
+    
+}
+
+void filmographie(e_genre genre)
+{
+    cout<<"Les Films du genre :"; afficherGenre(genre);cout<<endl;
+    for(int i=0;i<NB_FILM;i++)
+        if (films[i].genres[0] == genre || films[i].genres[1] == genre)
+        {
+            cout<<endl;
+            afficherFilm(films[i]);
+            cout<<endl;
+        }
 }

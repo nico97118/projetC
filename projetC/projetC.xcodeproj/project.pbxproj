@@ -67,9 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				5C264C56187BC12A004ACE49 /* main.cpp */,
-				5C264C5F187BC192004ACE49 /* film.cpp */,
 				5C264C62187BC1FB004ACE49 /* personne.cpp */,
 				5C264C63187BC1FB004ACE49 /* personne.h */,
+				5C264C5F187BC192004ACE49 /* film.cpp */,
 				5C264C60187BC192004ACE49 /* film.h */,
 				5C264C58187BC12A004ACE49 /* projetC.1 */,
 			);

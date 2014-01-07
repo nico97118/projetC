@@ -11,6 +11,8 @@
 
 #include "personne.h"
 
+
+
 typedef enum e_genre
 {
     AUCUN,
@@ -36,5 +38,6 @@ typedef struct s_film
 
 void afficherGenre(t_genre);
 void afficherFilm(t_film);
+void initFilm(t_film* film,const char* titre, long annee,long duree,t_personne* real=0,t_genre genre1=AUCUN,t_genre genre2=AUCUN, t_personne* acteur1=0,t_personne* acteur2=0, t_personne* acteur3=0, t_personne* acteur4= 0);
 
 #endif // FILM_H_INCLUDED

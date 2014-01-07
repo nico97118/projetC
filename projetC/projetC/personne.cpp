@@ -12,6 +12,22 @@
 
 using namespace std;
 
+void initPersonne(t_personne* personne,const char* prenom,const char* nom,const char* natio, long jn,long mn,long an)
+{
+    personne->prenom = new char[strlen(prenom)+1];
+    strcpy(personne->prenom, prenom);
+    
+    personne->nom = new char[strlen(nom)+1];
+    strcpy(personne->nom, nom);
+    
+    personne->natio = new char[strlen(natio)+1];
+    strcpy(personne->natio, natio);
+    
+    personne->daten.aa =an;
+    personne->daten.mm = mn;
+    personne->daten.jj = jn;
+}
+
 void afficherDate(t_datenaiss d)
 {
     char mois[12][10]={"janvier","fevrier","mars","avril","mai","juin","juillet","aout","septembre","octobre","novembre","decembre"};

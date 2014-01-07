@@ -61,3 +61,21 @@ void afficherFilm(t_film f)
     return;
 }
 
+void initFilm(t_film* film,const char* titre, long annee,long duree,t_personne* real,t_genre genre1,t_genre genre2, t_personne* acteur1 ,t_personne* acteur2 , t_personne* acteur3, t_personne* acteur4)
+{
+    film->titre = new char[strlen(titre)+1];
+    strcpy(film->titre, titre);
+    
+    film->duree = duree;
+    film->annee = annee;
+    
+    film->realis = real;
+    
+    film->genres[0] = genre1;
+    film->genres[1] = genre2;
+    
+    film->acteurs[0] = acteur1;
+    film->acteurs[1] = acteur2;
+    film->acteurs[2] = acteur3;
+    film->acteurs[3] = acteur4;
+}

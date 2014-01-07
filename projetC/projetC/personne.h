@@ -24,5 +24,7 @@ typedef struct s_personne
 
 void    afficherDate(t_datenaiss);
 void    afficherPers(t_personne, bool);
+void initPersonne(t_personne* personne,const char* prenom,const char* nom,const char* natio, long jn,long mn,long an);
+
 
 #endif // PERSONNE_H_INCLUDED
