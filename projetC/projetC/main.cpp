@@ -24,7 +24,7 @@ t_film* rechercheFilm(const char* search);
 void filmographie(t_personne* search,long annee =-1);
 void filmographie(const char* search,long annee = -1);
 void filmographie(e_genre genre);
-void filmographie(long annee);
+void filmPlusVieu(long annee);
 
 t_personne real[NB_REAL];
 t_personne   acteurs[NB_ACTEUR];
@@ -34,9 +34,8 @@ int main()
 {
     initbdd();
     
-     filmographie(2010);
+    filmographie("Leonardo");
     cout<<endl;
-    filmographie("Leonardo",2012);
     
     return 0;
 }
@@ -45,9 +44,11 @@ t_personne* rechercheActeur(const char* search)
 {
     for(int i = 0;i<NB_ACTEUR;i++)
     {
+        if(acteurs[i].nom != NULL)
+        {
         if(strcmp(search ,acteurs[i].nom)== 0 || strcmp(search, acteurs[i].prenom) == 0)
            return &acteurs[i];
-
+        }
     }
     return NULL;
 }
@@ -55,8 +56,9 @@ t_personne* rechercheActeur(const char* search)
 t_personne* rechercheReali(const char* search)
 {
     for(int i =0;i<NB_REAL;i++)
-        if(strcmp(search,real[i].nom) == 0|| strcmp(search,real[i].prenom) == 0)
-            return &real[i];
+        if(real[i].nom != NULL)
+            if(strcmp(search,real[i].nom) == 0|| strcmp(search,real[i].prenom) == 0)
+                return &real[i];
     return NULL;
 }
 
@@ -67,7 +69,7 @@ t_personne* rechercheNom(const char* search)
     else if (rechercheReali(search))
         return rechercheReali(search);
     else
-        return NULL;
+        return nullptr;
 }
 
 t_film* rechercheFilm(const char* search)
@@ -88,6 +90,8 @@ int playinthis(t_personne* act,t_film* film) // retourne 1 si l'acteur joue dans
 
 void filmographie(t_personne* search,long annee) // affiche la filmographie de la personne
 {
+    if(search != NULL)
+    {
     cout<<"    Filmographie de ";
     afficherPers(*search, false);
     cout<<endl;
@@ -103,16 +107,21 @@ void filmographie(t_personne* search,long annee) // affiche la filmographie de l
             }
         }
     }
+    }
+    else
+        cout<<"Nous ne trouvons pas la personne recherchée"<<endl;
 }
 
 void filmographie(const char* search, long annee)
 {
-    if(rechercheNom(search))
+    if(rechercheNom(search)!= NULL)
         filmographie(rechercheNom(search),annee);
+    else
+        cout<<search<<" est introuvable."<<endl;
     
 }
 
-void filmographie(long annee)
+void filmPlusVieu(long annee)
 {
     cout<<"   Les films plus vieux que :"<<annee<<endl<<endl;
     for(int i=0;i<NB_FILM;i++)
